@@ -1,0 +1,3 @@
+HOST = ''
+DELAY = 30
+ATTEMPTS = 3
