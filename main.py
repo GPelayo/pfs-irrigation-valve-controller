@@ -2,12 +2,15 @@ import config
 import logging
 import requests
 import time
+import RPi.GPIO as GPIO
 
 pfs_log = logging.getLogger('pfs')
 
 if __name__ == '__main__':
     attempts = 0
-
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(config.RELAY_SWITCH_GPIO, GPIO.OUT)
+    GPIO.output(config.RELAY_SWITCH_GPIO, False)
     while True:
         url = f'{config.HOST}/api/status'
         try:
@@ -21,9 +24,9 @@ if __name__ == '__main__':
                             config.ATTEMPTS)
         else:
             if status_json.get('watering', False):
+                GPIO.output(config.RELAY_SWITCH_GPIO, True)
                 pfs_log.log(logging.INFO, 'Valve: Watering')
-                # if valve off trigger off:
-                # else do nothing
             else:
+                GPIO.output(config.RELAY_SWITCH_GPIO, False)
                 pfs_log.log(logging.INFO, 'Valve: Off')
             time.sleep(config.DELAY)
