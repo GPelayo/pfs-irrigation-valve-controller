@@ -6,6 +6,10 @@ import time
 import RPi.GPIO as GPIO
 
 pfs_log = logging.getLogger('pfs')
+logging.basicConfig(filename='log.txt',
+                    filemode='a',
+                    datefmt='%H:%M:%S',
+                    level=logging.INFO)
 
 if __name__ == '__main__':
     attempts = 0
