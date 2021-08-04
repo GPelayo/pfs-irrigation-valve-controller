@@ -1,3 +1,4 @@
+VALVE_NAME = ''
 STATUS_URL = ''
 DELAY = 30
 ATTEMPTS = 3

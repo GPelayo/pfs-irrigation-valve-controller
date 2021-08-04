@@ -17,7 +17,7 @@ if __name__ == '__main__':
     GPIO.setup(config.RELAY_SWITCH_GPIO, GPIO.OUT)
     GPIO.output(config.RELAY_SWITCH_GPIO, False)
     while True:
-        url = f'{config.STATUS_URL}/status'
+        url = f'{config.STATUS_URL}/valves/{config.VALVE_NAME}'
         try:
             status_json = requests.get(url).json()
         except requests.exceptions.MissingSchema:
