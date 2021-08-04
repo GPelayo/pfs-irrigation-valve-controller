@@ -16,10 +16,14 @@ if __name__ == '__main__':
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(config.RELAY_SWITCH_GPIO, GPIO.OUT)
     GPIO.output(config.RELAY_SWITCH_GPIO, False)
+    headers = {
+        'Content-type': 'application/json',
+        'x-api-key': config.API_KEY
+    }
     while True:
         url = f'{config.STATUS_URL}/valves/{config.VALVE_NAME}'
         try:
-            status_json = requests.get(url).json()
+            status_json = requests.get(url, headers=headers).json()
         except requests.exceptions.MissingSchema:
             if attempts == config.ATTEMPTS:
                 break
