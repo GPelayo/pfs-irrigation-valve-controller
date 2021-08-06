@@ -21,7 +21,7 @@ if __name__ == '__main__':
         'x-api-key': config.API_KEY
     }
     while True:
-        url = f'{config.STATUS_URL}/valves/{config.VALVE_NAME}'
+        url = f'{config.STATUS_URL}/valve/{config.VALVE_NAME}'
         try:
             status_json = requests.get(url, headers=headers).json()
         except requests.exceptions.MissingSchema:
